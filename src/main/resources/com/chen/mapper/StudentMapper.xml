@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.mapper.StudentMapper">
+    <insert id="save">
+      INSERT INTO student(id,name,age,address) VALUES(#{id},#{name},#{age},#{address})
+    </insert>
+
+    <resultMap id="getByIdResultMap" type="stu">
+        <id column="sid" property="id"/>
+    </resultMap>
+    <select id="getById" resultMap="getByIdResultMap">
+       SELECT * FROM student WHERE id = #{id}
+    </select>
+
+    <select id="getByNameAndAddress" resultType="stu">
+        SELECT * FROM student WHERE name = #{sname} AND address = #{address}
+    </select>
+
+    <select id="getByName" resultType="stu">
+        SELECT * FROM ${tableName} WHERE name = #{name} AND id = #{id}
+    </select>
+
+    <select id="getAll" resultType="map">
+        SELECT name,address FROM student
+    </select>
+
+    <select id="getMap" resultType="map">
+        SELECT * FROM student
+    </select>
+
+    <select id="listAll2" resultType="stu">
+        SELECT name,address FROM student
+    </select>
+
+    <resultMap id="myResultMap" type="stu">
+        <id column="age" property="id"/>
+        <result column="name" property="name"/>
+        <result column="id" property="age"/>
+        <result column="address" property="address"/>
+    </resultMap>
+    <select id="listAll" resultMap="myResultMap">
+        SELECT * FROM student
+    </select>
+
+    <select id="getByClazzId" resultMap="getByIdResultMap">
+        SELECT * FROM student WHERE clazz_id = #{id}
+    </select>
+</mapper>
